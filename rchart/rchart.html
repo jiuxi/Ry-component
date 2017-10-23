@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+  <!-- <script src="http://echarts.baidu.com/build/dist/echarts.js"></script> -->
+  <script src="echarts.min.js"></script>
+  <!-- <script src="echarts.min2.js"></script> -->
+  <style>
+    .chartBox {
+      height: 400px;
+      background: #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="chart1" class="chartBox"></div>
+  <div id="chart2" class="chartBox"></div>
+  <div id="chart3" class="chartBox"></div>
+
+
+</body>
+
+</html>
+<script>
+
+  var rchart = (function () {
+    var b = 321;
+    return b;
+  })();
+
+  option2 = {
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'shadow',
+      },
+    },
+    grid: {
+      top: 108,
+      bottom: 80,
+      left: 60,
+      right: 22,
+
+    },
+    legend: {
+      data: ['统计数量'],
+      top: 30,
+    },
+    dataZoom: [
+      {
+        show: false,
+        startValue: 0,
+        endValue: 23,
+        height: 20,
+        bottom: 29,
+        handleStyle: {
+          color: '#a7b7cc',
+        }
+      }],
+    xAxis: {
+      data: [],
+      axisLabel: {
+        textStyle: {
+          color: '#333'
+        },
+      },
+      axisTick: {
+        show: false,
+      },
+      axisLine: {
+        lineStyle: {
+          color: '#979797',
+        },
+      },
+    },
+    yAxis: {
+      name: '次数',
+      nameTextStyle: {
+        color: '#333333',
+        fontSize: '14',
+        align: 'right',
+      },
+      axisLine: {
+        // show: false
+        lineStyle: {
+          color: '#cccccc',
+        },
+      },
+      axisTick: {
+        show: false,
+      },
+      splitLine: {
+        lineStyle: {
+          // type: 'dashed'
+        }
+      },
+      axisLabel: {
+        textStyle: {
+          color: '#666',
+        }
+      },
+    },
+    series: [
+      {
+        type: 'bar',
+        zlevel: 10,
+        name: '统计数量',
+        barWidth: '25',
+        data: [],
+        label: {
+          normal: {
+            show: true,
+            position: 'top',
+          },
+        },
+        itemStyle: {
+          normal: {
+            color: '#006699'
+          }
+        },
+      },]
+  };
+
+  rchart1 = function (obj) {
+    var chart = echarts.init(document.getElementById(obj.el));
+
+
+    chart.setOption(option2);
+    //调用屏幕自适应的方法
+    adaptionWindows(chart);
+  }
+
+  rchart1({
+    el: 'chart1'
+  });
+
+
+  rchart1({
+    el: 'chart2'
+  });
+
+  rchart1({
+    el: 'chart3'
+  });
+
+
+  /**
+ * Echarts自适应屏幕
+ * @param chartName
+ */
+  function adaptionWindows(chartName) {
+    window.addEventListener('resize', function () {
+      chartName.resize();
+    });
+  }
+</script>
