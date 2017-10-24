@@ -7,7 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title></title>
   <!-- <script src="http://echarts.baidu.com/build/dist/echarts.js"></script> -->
-  <script src="echarts.min.js"></script>
+  <script src="js/ry.js"></script>
+  <script src="js/echarts.min.js"></script>
   <!-- <script src="echarts.min2.js"></script> -->
   <style>
     .chartBox {
@@ -132,7 +133,7 @@
 
     chart.setOption(option2);
     //调用屏幕自适应的方法
-    adaptionWindows(chart);
+    R.adaptionWindows(chart);
   }
 
   rchart1({
@@ -149,13 +150,5 @@
   });
 
 
-  /**
- * Echarts自适应屏幕
- * @param chartName
- */
-  function adaptionWindows(chartName) {
-    window.addEventListener('resize', function () {
-      chartName.resize();
-    });
-  }
+
 </script>
