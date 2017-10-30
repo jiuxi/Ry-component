@@ -5,20 +5,99 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>组件demo</title>
   <link rel="stylesheet" href="css/reset.css">
-  <script src="js/jquery-2.0.0.min.js"></script>
-  <script src="js/vue-2.2.0.min.js"></script>
+  <link rel="stylesheet" href="iconfont/iconfont.css">
+  <style>
+    body {
+      padding: 20px;
+    }
+
+    .selectBox {
+      max-width: 300px;
+      cursor: pointer;
+    }
+
+    .selectHd {
+      position: relative;
+      border: 1px solid #ddd;
+      line-height: 32px;
+      padding: 0 0 0 16px;
+    }
+
+    .selectMain ul {
+      border-left: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+
+    }
+
+    .selectMain ul li {
+      border-bottom: 1px solid #ddd;
+      line-height: 32px;
+      padding: 0 0 0 16px;
+      position: relative;
+    }
+
+    .selectMain ul li:not(.active):hover {
+      background: #f8f8f8;
+    }
+
+
+    .selectMain ul li:before {
+      background: #ececec;
+      height: 100%;
+      right: 100%;
+      left: 0;
+      content: "";
+      transition: right 400ms ease;
+      position: absolute;
+    }
+
+    .selectMain ul li:not(.active):hover:before {
+      right: 0;
+    }
+
+    .selectMain ul li div {
+      position: relative;
+    }
+
+    .selectMain ul .active {
+      background: #108EE9;
+      color: #fff;
+    }
+
+    .iconBox {
+      position: absolute;
+      height: 100%;
+      right: 5px;
+      top: 0;
+      text-align: center;
+      color: #666666;
+      transition: all .3s;
+    }
+  </style>
 </head>
 
 <body>
-  <div>
-    <div>
-      333
+  <div class="selectBox">
+    <div class="selectHd">
+      <em>请选择</em>
+      <span class="iconBox">
+        <span class="iconfont  icon-moreunfold"></span>
+      </span>
     </div>
-    <div>
+    <div class="selectMain">
       <ul>
-        <li>111</li>
+        <li class="active">
+          <div>1111</div>
+        </li>
+        <li>
+          <div>1111</div>
+        </li>
+        <li>
+          <div>1111</div>
+        </li>
+
       </ul>
     </div>
   </div>
@@ -32,3 +111,5 @@
 
 
 </script>
+<script src="js/jquery-2.0.0.min.js"></script>
+<script src="js/vue-2.2.0.min.js"></script>
