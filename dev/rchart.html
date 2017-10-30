@@ -19,6 +19,7 @@
 </head>
 
 <body>
+  <video id="example_video_1" class="video-js" style="width:100%; height:510; " controls="controls" autoplay src="qwer.mp4"></video>
   <div id="chart1" class="chartBox"></div>
   <div id="chart2" class="chartBox"></div>
   <div id="chart3" class="chartBox"></div>
@@ -34,120 +35,296 @@
     return b;
   })();
 
-  option2 = {
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'shadow',
-      },
-    },
-    grid: {
-      top: 108,
-      bottom: 80,
-      left: 60,
-      right: 22,
 
-    },
-    legend: {
-      data: ['统计数量'],
-      top: 30,
-    },
-    dataZoom: [
-      {
-        show: false,
-        startValue: 0,
-        endValue: 23,
-        height: 20,
-        bottom: 29,
-        handleStyle: {
-          color: '#a7b7cc',
-        }
-      }],
-    xAxis: {
-      data: [],
-      axisLabel: {
-        textStyle: {
-          color: '#333'
+
+  rchart1 = function (el, option) {
+    var chart = echarts.init(document.getElementById(el));
+
+    var option2 = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow',
         },
       },
-      axisTick: {
-        show: false,
+      grid: {
+        top: 108,
+        bottom: 80,
+        left: 60,
+        right: 22,
+
       },
-      axisLine: {
-        lineStyle: {
-          color: '#979797',
-        },
+      legend: {
+        data: ['统计数量'],
+        top: 30,
       },
-    },
-    yAxis: {
-      name: '次数',
-      nameTextStyle: {
-        color: '#333333',
-        fontSize: '14',
-        align: 'right',
-      },
-      axisLine: {
-        // show: false
-        lineStyle: {
-          color: '#cccccc',
-        },
-      },
-      axisTick: {
-        show: false,
-      },
-      splitLine: {
-        lineStyle: {
-          // type: 'dashed'
-        }
-      },
-      axisLabel: {
-        textStyle: {
-          color: '#666',
-        }
-      },
-    },
-    series: [
-      {
-        type: 'bar',
-        zlevel: 10,
-        name: '统计数量',
-        barWidth: '25',
+      dataZoom: [
+        {
+          show: false,
+          startValue: 0,
+          endValue: 23,
+          height: 20,
+          bottom: 29,
+          handleStyle: {
+            color: '#a7b7cc',
+          }
+        }],
+      xAxis: {
         data: [],
-        label: {
-          normal: {
-            show: true,
-            position: 'top',
+        axisLabel: {
+          textStyle: {
+            color: '#333'
           },
         },
-        itemStyle: {
-          normal: {
-            color: '#006699'
+        axisTick: {
+          show: false,
+        },
+        axisLine: {
+          lineStyle: {
+            color: '#979797',
+          },
+        },
+      },
+      yAxis: {
+        name: '次数',
+        nameTextStyle: {
+          color: '#333333',
+          fontSize: '14',
+          align: 'right',
+        },
+        axisLine: {
+          // show: false
+          lineStyle: {
+            color: '#cccccc',
+          },
+        },
+        axisTick: {
+          show: false,
+        },
+        splitLine: {
+          lineStyle: {
+            // type: 'dashed'
           }
         },
-      },]
-  };
+        axisLabel: {
+          textStyle: {
+            color: '#666',
+          }
+        },
+      },
+      series: [
+        {
+          type: 'bar',
+          zlevel: 10,
+          name: '统计数量',
+          barWidth: '25',
+          data: [],
+          label: {
+            normal: {
+              show: true,
+              position: 'top',
+            },
+          },
+          itemStyle: {
+            normal: {
+              color: '#006699'
+            }
+          },
+        },]
+    };
 
-  rchart1 = function (obj) {
-    var chart = echarts.init(document.getElementById(obj.el));
+    for (item in option) {
+      console.log(option[item]);
+      option2[item] = option[item];
+    }
+    if (option2.dataZoom) {
+      option2.dataZoom[0].show = option2.xAxis.data.length < 24 ? false : true;
 
+    }
 
     chart.setOption(option2);
     //调用屏幕自适应的方法
     R.adaptionWindows(chart);
+    // console.log(chart.getDataURL());
+    console.log(chart.getConnectedDataURL());
   }
 
-  rchart1({
-    el: 'chart1'
+  rchart1('chart1', {
+    "legend": {
+      "data": [
+        "教师答疑数量22"
+      ],
+      "top": 30
+    },
+
+    "xAxis": {
+      "data": [
+        "陈绍德",
+        "邓爱平",
+        "付从梅",
+        "郭刚",
+        "韩先才",
+        "何大燕",
+        "何修国",
+        "李加霞",
+        "李丽娟",
+        "李雪",
+        "刘俊杰",
+        "刘鹏洋",
+        "刘越",
+        "罗雅丹",
+        "马传兰",
+        "牟朝盛",
+        "沈洪刚",
+        "宋咏",
+        "索争科",
+        "谭小琴",
+        "唐明成",
+        "田霞",
+        "王晓峰",
+        "魏成富",
+        "吴瑕",
+        "伍启伟",
+        "肖学英",
+        "徐飘萍",
+        "徐诗亮",
+        "杨成斌",
+        "杨兴奎",
+        "杨雪梅",
+        "张栋成",
+        "张济宏",
+        "张茂"
+      ],
+      "axisLabel": {
+        "textStyle": {
+          "color": "#333"
+        }
+      },
+      "axisTick": {
+        "show": false
+      },
+      "axisLine": {
+        "lineStyle": {
+          "color": "#979797"
+        }
+      }
+    },
+
+    "series": [
+      {
+        "type": "bar",
+        "zlevel": 10,
+        "name": "教师答疑数量22",
+        "barWidth": "25",
+        "data": [
+          405,
+          221,
+          336,
+          101,
+          6259,
+          111,
+          201,
+          187,
+          482,
+          200,
+          93,
+          649,
+          110,
+          1,
+          52,
+          48,
+          49,
+          154,
+          1,
+          217,
+          372,
+          1,
+          495,
+          910,
+          63,
+          2,
+          124,
+          125,
+          164,
+          285,
+          371,
+          3544,
+          478,
+          1,
+          1063
+        ],
+        "label": {
+          "normal": {
+            "show": true,
+            "position": "top"
+          }
+        },
+        "itemStyle": {
+          "normal": {
+            "color": "#0f578f"
+          }
+        }
+      },
+      {
+        "type": "line",
+        "name": "平均值",
+        "data": [
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71",
+          "510.71"
+        ],
+        "symbol": "none",
+        "markPoint": {},
+        "itemStyle": {
+          "normal": {
+            "color": "#ff7e00"
+          }
+        },
+        "lineStyle": {
+          "normal": {
+            "type": "dashed"
+          }
+        }
+      }
+    ]
   });
 
 
-  rchart1({
-    el: 'chart2'
-  });
+  rchart1('chart2');
 
-  rchart1({
-    el: 'chart3'
-  });
+  rchart1('chart3');
 
 
 
