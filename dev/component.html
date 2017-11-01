@@ -8,9 +8,37 @@
   <title>组件demo</title>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="iconfont/iconfont.css">
+  <script type="x/template" id="select-box">
+    <div class="selectBox" >
+        <div class="selectHd" @click.stop="toggleMenu($event)">
+          {{beforestr}}
+          <em>{{title}}</em>
+          <span class="iconBox">
+            <span class="iconfont  icon-moreunfold"></span>
+          </span>
+        </div>
+        <div class="selectMain">
+          <ul>
+            <li v-for="(item,index) in datalist" @click="handle($event,item,index)" :class="{'active':index === selIndex,}" >
+              <div>{{item[showkey ? showkey : 'name' ]}}</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+  </script>
   <style>
+    html,
     body {
-      padding: 20px;
+      height: 100%;
+    }
+
+    body {
+      padding: 0 20px;
+    }
+
+    .typeBox {
+      overflow: hidden;
+      padding: 20px 0;
     }
 
     .showBox {
@@ -19,6 +47,21 @@
       min-width: 200px;
     }
 
+    .title {
+      padding: 0 20px;
+    }
+
+
+    /* 公共class start */
+
+    .whCenter {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    /* 公共class end */
 
     /* 下拉框 start */
 
@@ -33,6 +76,10 @@
       border: 1px solid #ddd;
       line-height: 32px;
       padding: 0 0 0 16px;
+    }
+
+    .selectMain {
+      display: none;
     }
 
     .selectMain ul {
@@ -68,7 +115,7 @@
       position: absolute;
     }
 
-    .selectMain ul li:not(.active):hover:before {
+    .selectMain ul li:hover:before {
       right: 0;
     }
 
@@ -76,10 +123,14 @@
       position: relative;
     }
 
-    .selectMain ul li.active {
+    .selectMain ul .active {
       background: #108EE9;
       color: #fff;
-      transition: none;
+
+    }
+
+    .selectMain ul .active::before {
+      display: none;
     }
 
     .iconBox {
@@ -93,42 +144,101 @@
     }
 
     /* 下拉框 end */
+
+    /* 弹出层 end */
+
+    .maskBox {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      background: #fff;
+      opacity: 0.4;
+      z-index: 50;
+    }
+
+    .dialogBox {
+      width: 470px;
+      height: 420px;
+      background-color: #ffffff;
+      box-shadow: 0 1px 4px 0 rgba(51, 51, 51, 0.5);
+      border: solid 1px #dddddd;
+      position: fixed;
+      z-index: 100;
+    }
+
+    /* 弹出层 end */
   </style>
 </head>
 
 <body>
   <div id="main">
-    <div class="showBox">
-      <select-box :datalist="arr1" beforestr='选择年级 : ' v-on:lisel='selectSel'></select-box>
+    <div class="typeBox">
+      <p class="title">下拉框</p>
+      <div class="showBox">
+        <select-box :datalist="arr1" beforestr='选择年级 ：' v-on:lisel='selectSel'></select-box>
 
+      </div>
+      <div class="showBox">
+        <select-box :datalist="arr2" v-on:lisel='selClass' v-if="show"></select-box>
+      </div>
     </div>
-    <div class="showBox">
-      <select-box :datalist="arr2" v-on:lisel='selClass'></select-box>
+
+
+    <div class="typeBox">
+      <p class="title">弹出层</p>
+      <div class="showBox">
+        <!-- <div class="maskBox">
+
+        </div> -->
+        <!-- <div class="dialogBox whCenter">
+          <div class="dialogBoxHd">
+            ere
+          </div>
+          <div class="dialogBoxMain">
+            <div class="showBox">
+              <select-box :datalist="arr1" v-on:lisel='selectSel'></select-box>
+
+            </div>
+          </div>
+        </div> -->
+      </div>
     </div>
+
+
+    <div class="typeBox">
+      <p class="title">选项卡</p>
+      <div class="showBox">
+
+      </div>
+    </div>
+
+
+    <div class="typeBox">
+      <p class="title">树形菜单</p>
+      <div class="showBox">
+
+      </div>
+    </div>
+
+
+    <div class="typeBox">
+      <p class="title">选项卡</p>
+      <div class="showBox">
+
+      </div>
+    </div>
+
   </div>
+
+
 </body>
 
 </html>
 <script src="js/jquery-2.0.0.min.js"></script>
 <script src="js/vue-2.2.0.min.js"></script>
-<script type="x/template" id="select-box">
-  <div class="selectBox" >
-      <div class="selectHd" @click.stop="toggleMenu($event)">
-        {{beforestr}}
-        <em>{{title}}</em>
-        <span class="iconBox">
-          <span class="iconfont  icon-moreunfold"></span>
-        </span>
-      </div>
-      <div class="selectMain">
-        <ul>
-          <li v-for="(item,index) in datalist" @click="handle($event,item,index)" :class="{'active':index === selIndex,}" >
-            <div>{{item[showkey ? showkey : 'name' ]}}</div>
-          </li>
-        </ul>
-      </div>
-    </div>
-</script>
+
 <script>
   (function (window, $, Vue, undefined) {
     Vue.component('select-box', {
@@ -159,60 +269,65 @@
   demo = new Vue({
     el: '#main',
     data: {
+      show: true,
       arr1: [
         {
           name: '高一', id: 11, children: [
-            { name: '111', id: 11 },
-            { name: '02班', id: 22 },
-            { name: '03班', id: 33 },
-            { name: '04班', id: 11 },
-            { name: '05班', id: 22 },
-            { name: '06班', id: 33 },
+            { name: '高一01班', id: 11 },
+            { name: '高一02班', id: 22 },
+            { name: '高一03班', id: 33 },
+            { name: '高一04班', id: 11 },
+            { name: '高一05班', id: 22 },
+            { name: '高一06班', id: 33 },
           ]
         },
         {
           name: '高二', id: 22, children: [
-            { name: '222', id: 11 },
-            { name: '02班', id: 22 },
-            { name: '03班', id: 33 },
-            { name: '04班', id: 11 },
-            { name: '05班', id: 22 },
-            { name: '06班', id: 33 },
+            { name: '高二01班', id: 11 },
+            { name: '高二02班', id: 22 },
+            { name: '高二03班', id: 33 },
+            { name: '高二04班', id: 11 },
+            { name: '高二05班', id: 22 },
+            { name: '高二06班', id: 33 },
           ]
         },
         {
           name: '高三', id: 33, children: [
-            { name: '333', id: 11 },
-            { name: '02班', id: 22 },
-            { name: '03班', id: 33 },
-            { name: '04班', id: 11 },
-            { name: '05班', id: 22 },
-            { name: '06班', id: 33 },
+            { name: '高三01班', id: 11 },
+            { name: '高三02班', id: 22 },
+            { name: '高三03班', id: 33 },
+            { name: '高三04班', id: 11 },
+            { name: '高三05班', id: 22 },
+            { name: '高三06班', id: 33 },
           ]
         },
       ],
       arr2: [
-        { name: '01班', id: 11 },
-        { name: '02班', id: 22 },
-        { name: '03班', id: 33 },
-        { name: '04班', id: 11 },
-        { name: '05班', id: 22 },
-        { name: '06班', id: 33 },
+        { name: '高一01班', id: 11 },
+        { name: '高一02班', id: 22 },
+        { name: '高一03班', id: 33 },
+        { name: '高一04班', id: 11 },
+        { name: '高一05班', id: 22 },
+        { name: '高一06班', id: 33 },
       ],
     },
     methods: {
       selectSel: function (item) {
-        console.log(item);
-        this.arr2 = item.children;
+        // console.log(item);
+        this.show = false;
+        this.$nextTick(function () {
+          this.show = true;
+          this.arr2 = item.children;
+        });
       },
-      selClass: function () {
-        console.log(item)
+      selClass: function (item) {
+        // console.log(item)
       },
     },
 
   });
-
-  // $('body').on('click', function () {
-  //   $('.selectMain').hide();
-  // });
+  //点击页面其他位置 收起左右的下拉框
+  $('body').on('click', function () {
+    $('.selectMain').hide();
+  });
 </script>
