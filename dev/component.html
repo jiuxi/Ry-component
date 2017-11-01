@@ -13,9 +13,19 @@
       padding: 20px;
     }
 
+    .showBox {
+      float: left;
+      padding: 20px;
+      min-width: 200px;
+    }
+
+
+    /* 下拉框 start */
+
     .selectBox {
       max-width: 300px;
       cursor: pointer;
+      font-size: 14px;
     }
 
     .selectHd {
@@ -28,6 +38,7 @@
     .selectMain ul {
       border-left: 1px solid #ddd;
       border-right: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
 
     }
 
@@ -36,6 +47,10 @@
       line-height: 32px;
       padding: 0 0 0 16px;
       position: relative;
+    }
+
+    .selectMain ul li:last-child {
+      border: none;
     }
 
     .selectMain ul li:not(.active):hover {
@@ -61,9 +76,10 @@
       position: relative;
     }
 
-    .selectMain ul .active {
+    .selectMain ul li.active {
       background: #108EE9;
       color: #fff;
+      transition: none;
     }
 
     .iconBox {
@@ -73,43 +89,130 @@
       top: 0;
       text-align: center;
       color: #666666;
-      transition: all .3s;
+      transition: all 3s;
     }
+
+    /* 下拉框 end */
   </style>
 </head>
 
 <body>
-  <div class="selectBox">
-    <div class="selectHd">
-      <em>请选择</em>
-      <span class="iconBox">
-        <span class="iconfont  icon-moreunfold"></span>
-      </span>
-    </div>
-    <div class="selectMain">
-      <ul>
-        <li class="active">
-          <div>1111</div>
-        </li>
-        <li>
-          <div>1111</div>
-        </li>
-        <li>
-          <div>1111</div>
-        </li>
+  <div id="main">
+    <div class="showBox">
+      <select-box :datalist="arr1" beforestr='选择年级 : ' v-on:lisel='selectSel'></select-box>
 
-      </ul>
+    </div>
+    <div class="showBox">
+      <select-box :datalist="arr2" v-on:lisel='selClass'></select-box>
     </div>
   </div>
-
-
-
 </body>
 
 </html>
-<script>
-
-
-</script>
 <script src="js/jquery-2.0.0.min.js"></script>
 <script src="js/vue-2.2.0.min.js"></script>
+<script type="x/template" id="select-box">
+  <div class="selectBox" >
+      <div class="selectHd" @click.stop="toggleMenu($event)">
+        {{beforestr}}
+        <em>{{title}}</em>
+        <span class="iconBox">
+          <span class="iconfont  icon-moreunfold"></span>
+        </span>
+      </div>
+      <div class="selectMain">
+        <ul>
+          <li v-for="(item,index) in datalist" @click="handle($event,item,index)" :class="{'active':index === selIndex,}" >
+            <div>{{item[showkey ? showkey : 'name' ]}}</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+</script>
+<script>
+  (function (window, $, Vue, undefined) {
+    Vue.component('select-box', {
+      template: '#select-box',
+      props: ['datalist', 'beforestr', 'showkey'],
+      methods: {
+        handle: function ($event, item, index) {
+          this.title = item[this.showkey ? this.showkey : 'name'];
+          this.selIndex = index;
+          this.$emit('lisel', item);
+        },
+        toggleMenu: function ($event) {
+          $($event.currentTarget).next().toggle();
+        },
+      },
+      data: function () {
+        return {
+          title: this.datalist[0][this.showkey ? this.showkey : 'name'],
+          selIndex: 0,
+        }
+      },
+    });
+
+  })(window, jQuery, Vue)
+
+</script>
+<script>
+  demo = new Vue({
+    el: '#main',
+    data: {
+      arr1: [
+        {
+          name: '高一', id: 11, children: [
+            { name: '111', id: 11 },
+            { name: '02班', id: 22 },
+            { name: '03班', id: 33 },
+            { name: '04班', id: 11 },
+            { name: '05班', id: 22 },
+            { name: '06班', id: 33 },
+          ]
+        },
+        {
+          name: '高二', id: 22, children: [
+            { name: '222', id: 11 },
+            { name: '02班', id: 22 },
+            { name: '03班', id: 33 },
+            { name: '04班', id: 11 },
+            { name: '05班', id: 22 },
+            { name: '06班', id: 33 },
+          ]
+        },
+        {
+          name: '高三', id: 33, children: [
+            { name: '333', id: 11 },
+            { name: '02班', id: 22 },
+            { name: '03班', id: 33 },
+            { name: '04班', id: 11 },
+            { name: '05班', id: 22 },
+            { name: '06班', id: 33 },
+          ]
+        },
+      ],
+      arr2: [
+        { name: '01班', id: 11 },
+        { name: '02班', id: 22 },
+        { name: '03班', id: 33 },
+        { name: '04班', id: 11 },
+        { name: '05班', id: 22 },
+        { name: '06班', id: 33 },
+      ],
+    },
+    methods: {
+      selectSel: function (item) {
+        console.log(item);
+        this.arr2 = item.children;
+      },
+      selClass: function () {
+        console.log(item)
+      },
+    },
+
+  });
+
+  // $('body').on('click', function () {
+  //   $('.selectMain').hide();
+  // });
+</script>
