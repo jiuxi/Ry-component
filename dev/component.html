@@ -8,6 +8,205 @@
   <title>组件demo</title>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="iconfont/iconfont.css">
+  <script>
+    cascaderArr = [{
+      value: 'zhinan',
+      label: '指南',
+      children: [{
+        value: 'shejiyuanze',
+        label: '设计原则',
+        children: [{
+          value: 'yizhi',
+          label: '一致'
+        }, {
+          value: 'fankui',
+          label: '反馈'
+        }, {
+          value: 'xiaolv',
+          label: '效率'
+        }, {
+          value: 'kekong',
+          label: '可控'
+        }]
+      }, {
+        value: 'daohang',
+        label: '导航',
+        children: [{
+          value: 'cexiangdaohang',
+          label: '侧向导航'
+        }, {
+          value: 'dingbudaohang',
+          label: '顶部导航'
+        }]
+      }]
+    }, {
+      value: 'zujian',
+      label: '组件',
+      children: [{
+        value: 'basic',
+        label: 'Basic',
+        children: [{
+          value: 'layout',
+          label: 'Layout 布局'
+        }, {
+          value: 'color',
+          label: 'Color 色彩'
+        }, {
+          value: 'typography',
+          label: 'Typography 字体'
+        }, {
+          value: 'icon',
+          label: 'Icon 图标'
+        }, {
+          value: 'button',
+          label: 'Button 按钮'
+        }]
+      }, {
+        value: 'form',
+        label: 'Form',
+        children: [{
+          value: 'radio',
+          label: 'Radio 单选框'
+        }, {
+          value: 'checkbox',
+          label: 'Checkbox 多选框'
+        }, {
+          value: 'input',
+          label: 'Input 输入框'
+        }, {
+          value: 'input-number',
+          label: 'InputNumber 计数器'
+        }, {
+          value: 'select',
+          label: 'Select 选择器'
+        }, {
+          value: 'cascader',
+          label: 'Cascader 级联选择器'
+        }, {
+          value: 'switch',
+          label: 'Switch 开关'
+        }, {
+          value: 'slider',
+          label: 'Slider 滑块'
+        }, {
+          value: 'time-picker',
+          label: 'TimePicker 时间选择器'
+        }, {
+          value: 'date-picker',
+          label: 'DatePicker 日期选择器'
+        }, {
+          value: 'datetime-picker',
+          label: 'DateTimePicker 日期时间选择器'
+        }, {
+          value: 'upload',
+          label: 'Upload 上传'
+        }, {
+          value: 'rate',
+          label: 'Rate 评分'
+        }, {
+          value: 'form',
+          label: 'Form 表单'
+        }]
+      }, {
+        value: 'data',
+        label: 'Data',
+        children: [{
+          value: 'table',
+          label: 'Table 表格'
+        }, {
+          value: 'tag',
+          label: 'Tag 标签'
+        }, {
+          value: 'progress',
+          label: 'Progress 进度条'
+        }, {
+          value: 'tree',
+          label: 'Tree 树形控件'
+        }, {
+          value: 'pagination',
+          label: 'Pagination 分页'
+        }, {
+          value: 'badge',
+          label: 'Badge 标记'
+        }]
+      }, {
+        value: 'notice',
+        label: 'Notice',
+        children: [{
+          value: 'alert',
+          label: 'Alert 警告'
+        }, {
+          value: 'loading',
+          label: 'Loading 加载'
+        }, {
+          value: 'message',
+          label: 'Message 消息提示'
+        }, {
+          value: 'message-box',
+          label: 'MessageBox 弹框'
+        }, {
+          value: 'notification',
+          label: 'Notification 通知'
+        }]
+      }, {
+        value: 'navigation',
+        label: 'Navigation',
+        children: [{
+          value: 'menu',
+          label: 'NavMenu 导航菜单'
+        }, {
+          value: 'tabs',
+          label: 'Tabs 标签页'
+        }, {
+          value: 'breadcrumb',
+          label: 'Breadcrumb 面包屑'
+        }, {
+          value: 'dropdown',
+          label: 'Dropdown 下拉菜单'
+        }, {
+          value: 'steps',
+          label: 'Steps 步骤条'
+        }]
+      }, {
+        value: 'others',
+        label: 'Others',
+        children: [{
+          value: 'dialog',
+          label: 'Dialog 对话框'
+        }, {
+          value: 'tooltip',
+          label: 'Tooltip 文字提示'
+        }, {
+          value: 'popover',
+          label: 'Popover 弹出框'
+        }, {
+          value: 'card',
+          label: 'Card 卡片'
+        }, {
+          value: 'carousel',
+          label: 'Carousel 走马灯'
+        }, {
+          value: 'collapse',
+          label: 'Collapse 折叠面板'
+        }]
+      }]
+    }, {
+      value: 'ziyuan',
+      label: '资源',
+      children: [{
+        value: 'axure',
+        label: 'Axure Components'
+      }, {
+        value: 'sketch',
+        label: 'Sketch Templates'
+      }, {
+        value: 'jiaohu',
+        label: '组件交互文档'
+      }]
+    }]
+
+
+  </script>
   <script type="x/template" id="select-box">
     <div class="selectBox" >
         <div class="selectHd" @click.stop="toggleMenu($event)">
@@ -80,13 +279,22 @@
 
     .selectMain {
       display: none;
+      white-space: nowrap;
+      font-size: 0px;
     }
 
     .selectMain ul {
-      border-left: 1px solid #ddd;
-      border-right: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
+      border: 1px solid #ddd;
+      max-height: 400px;
+      overflow: hidden;
+      margin-top: -1px;
 
+      min-width: 160px;
+      font-size: 14px;
+    }
+
+    .selectMain ul:not(:first-child) {
+      margin-left: -1px;
     }
 
     .selectMain ul li {
@@ -145,7 +353,17 @@
 
     /* 下拉框 end */
 
-    /* 弹出层 end */
+    /* 级联菜单 start */
+
+    .cascoder_memus .selectMain ul {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+
+    /* 级联菜单 end */
+
+    /* 弹出层 start */
 
     .maskBox {
       position: fixed;
@@ -156,6 +374,7 @@
       background: #fff;
       opacity: 0.4;
       z-index: 50;
+      display: none;
     }
 
     .dialogBox {
@@ -166,6 +385,8 @@
       border: solid 1px #dddddd;
       position: fixed;
       z-index: 100;
+      display: none;
+
     }
 
     /* 弹出层 end */
@@ -174,6 +395,35 @@
 
 <body>
   <div id="main">
+
+    <div class="typeBox">
+      <p class="title">按钮</p>
+      <div class="showBox">
+
+      </div>
+    </div>
+    <div class="typeBox">
+      <p class="title">级联菜单</p>
+      <div class="showBox">
+        <div class="selectBox cascoder_memus">
+          <div class="selectHd">
+            选择年级 ：
+            <em>高三</em>
+            <span class="iconBox">
+              <span class="iconfont  icon-moreunfold"></span>
+            </span>
+          </div>
+          <div class="selectMain" style="display: block;">
+            <ul v-for="item in cascaderArr">
+              <li class="" v-for="item1 in item" @click="showChildren">
+                <div>{{item1.label}}</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="typeBox">
       <p class="title">下拉框</p>
       <div class="showBox">
@@ -188,11 +438,12 @@
 
     <div class="typeBox">
       <p class="title">弹出层</p>
+      <div></div>
       <div class="showBox">
-        <!-- <div class="maskBox">
+        <div class="maskBox">
 
-        </div> -->
-        <!-- <div class="dialogBox whCenter">
+        </div>
+        <div class="dialogBox whCenter">
           <div class="dialogBoxHd">
             ere
           </div>
@@ -202,13 +453,13 @@
 
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
 
 
     <div class="typeBox">
-      <p class="title">选项卡</p>
+      <p class="title">tab</p>
       <div class="showBox">
 
       </div>
@@ -238,7 +489,19 @@
 </html>
 <script src="js/jquery-2.0.0.min.js"></script>
 <script src="js/vue-2.2.0.min.js"></script>
+<script>
+  function parallelArr(array) {
+    var resArr = [[], []];
 
+    array.forEach(function (element) {
+      resArr[0].push(element);
+      if (element.children && element.children.length) {
+        resArr[1] = resArr[1].concat(element.children);
+      }
+    }, this);
+    return resArr;
+  }
+</script>
 <script>
   (function (window, $, Vue, undefined) {
     Vue.component('select-box', {
@@ -270,6 +533,7 @@
     el: '#main',
     data: {
       show: true,
+      cascaderArr: parallelArr(this.cascaderArr),
       arr1: [
         {
           name: '高一', id: 11, children: [
@@ -311,6 +575,13 @@
         { name: '高一06班', id: 33 },
       ],
     },
+    computed: {
+      // parallelArr: function () {
+      //   var arr =
+      //   console.log(arr)
+
+      // },
+    },
     methods: {
       selectSel: function (item) {
         // console.log(item);
@@ -323,6 +594,10 @@
       selClass: function (item) {
         // console.log(item)
       },
+
+      showChildren: function (item) {
+
+      }
     },
 
   });
