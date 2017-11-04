@@ -207,24 +207,7 @@
 
 
   </script>
-  <script type="x/template" id="select-box">
-    <div class="selectBox" >
-        <div class="selectHd" @click.stop="toggleMenu($event)">
-          {{beforestr}}
-          <em>{{title}}</em>
-          <span class="iconBox">
-            <span class="iconfont  icon-moreunfold"></span>
-          </span>
-        </div>
-        <div class="selectMain">
-          <ul>
-            <li v-for="(item,index) in datalist" @click="handle($event,item,index)" :class="{'active':index === selIndex,}" >
-              <div>{{item[showkey ? showkey : 'name' ]}}</div>
-            </li>
-          </ul>
-        </div>
-      </div>
-  </script>
+
   <style>
     html,
     body {
@@ -252,6 +235,12 @@
 
 
     /* 公共class start */
+
+    .clear::after {
+      content: '';
+      display: block;
+      clear: both;
+    }
 
     .whCenter {
       position: absolute;
@@ -390,11 +379,88 @@
     }
 
     /* 弹出层 end */
+
+    /* tab列表 end */
+
+    .tabBox {
+      position: relative;
+
+    }
+
+    .tabBox li {
+      float: left;
+      padding: 15px 15px;
+      position: relative;
+
+    }
+
+    .tabDefault .active span {
+      background: #42a5f5;
+      color: #fff;
+    }
+
+    .tabBox li span {
+      cursor: pointer;
+      padding: 4px 8px;
+
+    }
+
+    .tabUnderline li::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      right: 50%;
+      bottom: 0;
+      background: #42a5f5;
+      height: 4px;
+      transition: 0.5s all ease;
+    }
+
+    .tabUnderline li:hover:before {
+      left: 0;
+      right: 0;
+    }
+
+    .tabUnderline .active::before {
+      left: 0;
+      right: 0;
+    }
+
+    .tabBorder ul {
+      border: 1px solid #cacaca;
+      border-radius: 3px;
+    }
+
+    .tabBorder ul li {
+      width: 100px;
+    }
+
+    .tabBackground {
+      position: absolute;
+      height: 100%;
+      background: #cacaca;
+      top: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    /* tab列表 end */
   </style>
 </head>
 
 <body>
   <div id="main">
+
+    <div class="typeBox">
+      <p class="title">tab</p>
+      <div class="showBox">
+        <tab-box :datalist="arr2"></tab-box>
+        tab2
+        <tab-box :datalist="arr2" type="tabUnderline"></tab-box>
+        tab3
+        <tab-box :datalist="arr2" type="tabBorder"></tab-box>
+      </div>
+    </div>
 
     <div class="typeBox">
       <p class="title">按钮</p>
@@ -457,22 +523,12 @@
       </div>
     </div>
 
-
-    <div class="typeBox">
-      <p class="title">tab</p>
-      <div class="showBox">
-
-      </div>
-    </div>
-
-
     <div class="typeBox">
       <p class="title">树形菜单</p>
       <div class="showBox">
 
       </div>
     </div>
-
 
     <div class="typeBox">
       <p class="title">选项卡</p>
@@ -483,10 +539,37 @@
 
   </div>
 
-
 </body>
 
 </html>
+<script type="x/template" id="select-box">
+  <div class="selectBox" >
+      <div class="selectHd" @click.stop="toggleMenu($event)">
+        {{beforestr}}
+        <em>{{title}}</em>
+        <span class="iconBox">
+          <span class="iconfont  icon-moreunfold"></span>
+        </span>
+      </div>
+      <div class="selectMain">
+        <ul>
+          <li v-for="(item,index) in datalist" @click="handle($event,item,index)" :class="{'active':index === selIndex,}" >
+            <div>{{item[showkey ? showkey : 'name' ]}}</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+</script>
+<script type="x/template" id="tab-box">
+    <div class="tabBox" :class="type ? type : 'tabDefault'" >
+      <div class="tabBackground" v-if="type == 'tabBorder'"></div>        
+      <ul class="clear">
+         <li v-for="(item,index) in datalist" :class="{'active':index == selIndex}">
+            <span  @click="handle($event,item,index)">{{item.name}}</span>
+          </li>
+      </ul>
+    </div>
+</script>
 <script src="js/jquery-2.0.0.min.js"></script>
 <script src="js/vue-2.2.0.min.js"></script>
 <script>
@@ -520,6 +603,22 @@
       data: function () {
         return {
           title: this.datalist[0][this.showkey ? this.showkey : 'name'],
+          selIndex: 0,
+        }
+      },
+    });
+
+    Vue.component('tab-box', {
+      template: '#tab-box',
+      props: ['datalist', 'type'],
+      methods: {
+        handle: function ($event, item, index) {
+          this.selIndex = index;
+        }
+      },
+      data: function () {
+        return {
+
           selIndex: 0,
         }
       },
