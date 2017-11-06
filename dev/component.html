@@ -236,7 +236,7 @@
 
     /* 公共class start */
 
-    .clear::after {
+    .clearfix::after {
       content: '';
       display: block;
       clear: both;
@@ -380,17 +380,19 @@
 
     /* 弹出层 end */
 
-    /* tab列表 end */
+    /* tab列表 start */
 
     .tabBox {
       position: relative;
-
+      text-align: center;
     }
 
     .tabBox li {
       float: left;
       padding: 15px 15px;
       position: relative;
+      box-sizing: border-box;
+      cursor: pointer;
 
     }
 
@@ -400,7 +402,6 @@
     }
 
     .tabBox li span {
-      cursor: pointer;
       padding: 4px 8px;
 
     }
@@ -426,22 +427,83 @@
       right: 0;
     }
 
-    .tabBorder ul {
-      border: 1px solid #cacaca;
+
+    .tabBorder {
+      border: 1px solid #108ee9;
       border-radius: 3px;
+      height: 30px;
+      line-height: 30px;
+      overflow: hidden;
     }
 
     .tabBorder ul li {
       width: 100px;
+      padding: 0;
+      font-size: 12px;
+      color: #666;
+      border-right: 1px solid #108ee9;
+      transition: 0.8s background-color ease;
     }
+
+
+    .tabBorder ul li:last-child {
+      border: none;
+    }
+
+    .tabBorder li:hover {
+      background-color: #108ee929;
+
+    }
+
+    .tabBorder .active {
+      color: #fff;
+      transition: 0.8s all ease;
+
+    }
+
 
     .tabBackground {
       position: absolute;
       height: 100%;
-      background: #cacaca;
+      background: #108ee9;
       top: 0;
-      width: 100%;
+      width: 102px;
       overflow: hidden;
+    }
+
+    .tabIcon li::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      background: #e8e8e8;
+      width: 1px;
+      height: 20px;
+    }
+
+    .tabIcon li:last-child::after {
+      display: none;
+    }
+
+    .tabIcon em::after {
+      color: #999;
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      content: "\e605";
+    }
+
+
+
+    .tabIcon .active {
+      color: #108ee9;
+    }
+
+    .tabIcon .active em::after {
+      color: #108ee9;
+    }
+
+    .tabIcon li span {
+      padding: 0;
     }
 
     /* tab列表 end */
@@ -454,11 +516,13 @@
     <div class="typeBox">
       <p class="title">tab</p>
       <div class="showBox">
-        <tab-box :datalist="arr2"></tab-box>
+        <tab-box :datalist="courseArr" v-on:event='selTab'></tab-box>
         tab2
-        <tab-box :datalist="arr2" type="tabUnderline"></tab-box>
+        <tab-box :datalist="courseArr" v-on:event='selTab' type="tabUnderline"></tab-box>
         tab3
-        <tab-box :datalist="arr2" type="tabBorder"></tab-box>
+        <tab-box :datalist="courseArr" v-on:event='selTab' type="tabBorder"></tab-box>
+        tab4
+        <tab-box :datalist="courseArr" v-on:event='selTab' type="tabIcon"></tab-box>
       </div>
     </div>
 
@@ -493,11 +557,11 @@
     <div class="typeBox">
       <p class="title">下拉框</p>
       <div class="showBox">
-        <select-box :datalist="arr1" beforestr='选择年级 ：' v-on:lisel='selectSel'></select-box>
+        <select-box :datalist="arr1" beforestr='选择年级 ：' v-on:event='selectSel'></select-box>
 
       </div>
       <div class="showBox">
-        <select-box :datalist="arr2" v-on:lisel='selClass' v-if="show"></select-box>
+        <select-box :datalist="arr2" v-on:event='selClass' v-if="show"></select-box>
       </div>
     </div>
 
@@ -515,7 +579,7 @@
           </div>
           <div class="dialogBoxMain">
             <div class="showBox">
-              <select-box :datalist="arr1" v-on:lisel='selectSel'></select-box>
+              <select-box :datalist="arr1" v-on:event='selectSel'></select-box>
 
             </div>
           </div>
@@ -563,9 +627,10 @@
 <script type="x/template" id="tab-box">
     <div class="tabBox" :class="type ? type : 'tabDefault'" >
       <div class="tabBackground" v-if="type == 'tabBorder'"></div>        
-      <ul class="clear">
-         <li v-for="(item,index) in datalist" :class="{'active':index == selIndex}">
-            <span  @click="handle($event,item,index)">{{item.name}}</span>
+      <ul class="clearfix">
+         <li v-for="(item,index) in datalist" :class="{'active':index == selIndex}"  @click="handle($event,item,index)">
+           <em class="iconfont  " v-if="type=='tabIcon'"></em>
+            <span >{{item[showkey ? showkey : 'name']}}</span>
           </li>
       </ul>
     </div>
@@ -594,7 +659,7 @@
         handle: function ($event, item, index) {
           this.title = item[this.showkey ? this.showkey : 'name'];
           this.selIndex = index;
-          this.$emit('lisel', item);
+          this.$emit('event', item);
         },
         toggleMenu: function ($event) {
           $($event.currentTarget).next().toggle();
@@ -610,10 +675,16 @@
 
     Vue.component('tab-box', {
       template: '#tab-box',
-      props: ['datalist', 'type'],
+      props: ['datalist', 'type', 'showkey'],
       methods: {
         handle: function ($event, item, index) {
           this.selIndex = index;
+          this.$emit('event', item);
+          if (this.type == 'tabBorder') {
+            var $el = $($event.currentTarget);
+            var width = $el.parents('.tabBox').find('li:eq(0)').width() + 1;
+            $el.parents('.tabBox').find('.tabBackground').animate({ left: index * width });
+          }
         }
       },
       data: function () {
@@ -633,6 +704,14 @@
     data: {
       show: true,
       cascaderArr: parallelArr(this.cascaderArr),
+      courseArr: [
+        { name: '语文', id: 11 },
+        { name: '数学', id: 11 },
+        { name: '英语', id: 22 },
+        { name: '物理', id: 33 },
+        { name: '化学', id: 11 },
+        { name: '生物', id: 22 },
+      ],
       arr1: [
         {
           name: '高一', id: 11, children: [
@@ -682,6 +761,9 @@
       // },
     },
     methods: {
+      selTab: function (item) {
+        console.log(item)
+      },
       selectSel: function (item) {
         // console.log(item);
         this.show = false;
