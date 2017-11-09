@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>组件demo</title>
   <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/component1.0.css">
   <link rel="stylesheet" href="iconfont/iconfont.css">
   <script>
     cascaderArr = [{
@@ -214,17 +215,23 @@
       height: 100%;
     }
 
+    * {
+      box-sizing: border-box;
+
+    }
+
+
     body {
       padding: 0 20px;
     }
 
     .typeBox {
-      overflow: hidden;
+      /* overflow: hidden; */
       padding: 20px 0;
     }
 
     .showBox {
-      float: left;
+      /* float: left; */
       padding: 20px;
       min-width: 200px;
     }
@@ -251,104 +258,12 @@
 
     /* 公共class end */
 
-    /* 下拉框 start */
-
-    .selectBox {
-      max-width: 300px;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    .selectHd {
-      position: relative;
-      border: 1px solid #ddd;
-      line-height: 32px;
-      padding: 0 0 0 16px;
-    }
-
-    .selectMain {
-      display: none;
-      white-space: nowrap;
-      font-size: 0px;
-    }
-
-    .selectMain ul {
-      border: 1px solid #ddd;
-      max-height: 400px;
-      overflow: hidden;
-      margin-top: -1px;
-
-      min-width: 160px;
-      font-size: 14px;
-    }
-
-    .selectMain ul:not(:first-child) {
-      margin-left: -1px;
-    }
-
-    .selectMain ul li {
-      border-bottom: 1px solid #ddd;
-      line-height: 32px;
-      padding: 0 0 0 16px;
-      position: relative;
-    }
-
-    .selectMain ul li:last-child {
-      border: none;
-    }
-
-    .selectMain ul li:not(.active):hover {
-      background: #f8f8f8;
-    }
-
-
-    .selectMain ul li:before {
-      background: #ececec;
-      height: 100%;
-      right: 100%;
-      left: 0;
-      content: "";
-      transition: right 400ms ease;
-      position: absolute;
-    }
-
-    .selectMain ul li:hover:before {
-      right: 0;
-    }
-
-    .selectMain ul li div {
-      position: relative;
-    }
-
-    .selectMain ul .active {
-      background: #108EE9;
-      color: #fff;
-
-    }
-
-    .selectMain ul .active::before {
-      display: none;
-    }
-
-    .iconBox {
-      position: absolute;
-      height: 100%;
-      right: 5px;
-      top: 0;
-      text-align: center;
-      color: #666666;
-      transition: all 3s;
-    }
-
-    /* 下拉框 end */
-
     /* 级联菜单 start */
 
     .cascoder_memus .selectMain ul {
       display: inline-block;
       vertical-align: top;
     }
-
 
     /* 级联菜单 end */
 
@@ -375,138 +290,9 @@
       position: fixed;
       z-index: 100;
       display: none;
-
     }
 
     /* 弹出层 end */
-
-    /* tab列表 start */
-
-    .tabBox {
-      position: relative;
-      text-align: center;
-    }
-
-    .tabBox li {
-      float: left;
-      padding: 15px 15px;
-      position: relative;
-      box-sizing: border-box;
-      cursor: pointer;
-
-    }
-
-    .tabDefault .active span {
-      background: #42a5f5;
-      color: #fff;
-    }
-
-    .tabBox li span {
-      padding: 4px 8px;
-
-    }
-
-    .tabUnderline li::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      right: 50%;
-      bottom: 0;
-      background: #42a5f5;
-      height: 4px;
-      transition: 0.5s all ease;
-    }
-
-    .tabUnderline li:hover:before {
-      left: 0;
-      right: 0;
-    }
-
-    .tabUnderline .active::before {
-      left: 0;
-      right: 0;
-    }
-
-
-    .tabBorder {
-      border: 1px solid #108ee9;
-      border-radius: 3px;
-      height: 30px;
-      line-height: 30px;
-      overflow: hidden;
-    }
-
-    .tabBorder ul li {
-      width: 100px;
-      padding: 0;
-      font-size: 12px;
-      color: #666;
-      border-right: 1px solid #108ee9;
-      transition: 0.8s background-color ease;
-    }
-
-
-    .tabBorder ul li:last-child {
-      border: none;
-    }
-
-    .tabBorder li:hover {
-      background-color: #108ee929;
-
-    }
-
-    .tabBorder .active {
-      color: #fff;
-      transition: 0.8s all ease;
-
-    }
-
-
-    .tabBackground {
-      position: absolute;
-      height: 100%;
-      background: #108ee9;
-      top: 0;
-      width: 102px;
-      overflow: hidden;
-    }
-
-    .tabIcon li::after {
-      content: '';
-      position: absolute;
-      right: 0;
-      background: #e8e8e8;
-      width: 1px;
-      height: 20px;
-    }
-
-    .tabIcon li:last-child::after {
-      display: none;
-    }
-
-    .tabIcon em::after {
-      color: #999;
-      display: inline-block;
-      width: 18px;
-      height: 18px;
-      content: "\e605";
-    }
-
-
-
-    .tabIcon .active {
-      color: #108ee9;
-    }
-
-    .tabIcon .active em::after {
-      color: #108ee9;
-    }
-
-    .tabIcon li span {
-      padding: 0;
-    }
-
-    /* tab列表 end */
   </style>
 </head>
 
@@ -514,16 +300,24 @@
   <div id="main">
 
     <div class="typeBox">
-      <p class="title">tab</p>
+
       <div class="showBox">
+        <p class="title">tab</p>
         <tab-box :datalist="courseArr" v-on:event='selTab'></tab-box>
-        tab2
+      </div>
+      <div class="showBox">
+        <p class="title">tab</p>
         <tab-box :datalist="courseArr" v-on:event='selTab' type="tabUnderline"></tab-box>
-        tab3
+      </div>
+      <div class="showBox">
+        <p class="title">tab</p>
         <tab-box :datalist="courseArr" v-on:event='selTab' type="tabBorder"></tab-box>
-        tab4
+      </div>
+      <div class="showBox">
+        <p class="title">tab</p>
         <tab-box :datalist="courseArr" v-on:event='selTab' type="tabIcon"></tab-box>
       </div>
+
     </div>
 
     <div class="typeBox">
@@ -575,7 +369,7 @@
         </div>
         <div class="dialogBox whCenter">
           <div class="dialogBoxHd">
-            ere
+            弹出层
           </div>
           <div class="dialogBoxMain">
             <div class="showBox">
@@ -606,35 +400,6 @@
 </body>
 
 </html>
-<script type="x/template" id="select-box">
-  <div class="selectBox" >
-      <div class="selectHd" @click.stop="toggleMenu($event)">
-        {{beforestr}}
-        <em>{{title}}</em>
-        <span class="iconBox">
-          <span class="iconfont  icon-moreunfold"></span>
-        </span>
-      </div>
-      <div class="selectMain">
-        <ul>
-          <li v-for="(item,index) in datalist" @click="handle($event,item,index)" :class="{'active':index === selIndex,}" >
-            <div>{{item[showkey ? showkey : 'name' ]}}</div>
-          </li>
-        </ul>
-      </div>
-    </div>
-</script>
-<script type="x/template" id="tab-box">
-    <div class="tabBox" :class="type ? type : 'tabDefault'" >
-      <div class="tabBackground" v-if="type == 'tabBorder'"></div>        
-      <ul class="clearfix">
-         <li v-for="(item,index) in datalist" :class="{'active':index == selIndex}"  @click="handle($event,item,index)">
-           <em class="iconfont  " v-if="type=='tabIcon'"></em>
-            <span >{{item[showkey ? showkey : 'name']}}</span>
-          </li>
-      </ul>
-    </div>
-</script>
 <script src="js/jquery-2.0.0.min.js"></script>
 <script src="js/vue-2.2.0.min.js"></script>
 <script>
@@ -650,54 +415,7 @@
     return resArr;
   }
 </script>
-<script>
-  (function (window, $, Vue, undefined) {
-    Vue.component('select-box', {
-      template: '#select-box',
-      props: ['datalist', 'beforestr', 'showkey'],
-      methods: {
-        handle: function ($event, item, index) {
-          this.title = item[this.showkey ? this.showkey : 'name'];
-          this.selIndex = index;
-          this.$emit('event', item);
-        },
-        toggleMenu: function ($event) {
-          $($event.currentTarget).next().toggle();
-        },
-      },
-      data: function () {
-        return {
-          title: this.datalist[0][this.showkey ? this.showkey : 'name'],
-          selIndex: 0,
-        }
-      },
-    });
-
-    Vue.component('tab-box', {
-      template: '#tab-box',
-      props: ['datalist', 'type', 'showkey'],
-      methods: {
-        handle: function ($event, item, index) {
-          this.selIndex = index;
-          this.$emit('event', item);
-          if (this.type == 'tabBorder') {
-            var $el = $($event.currentTarget);
-            var width = $el.parents('.tabBox').find('li:eq(0)').width() + 1;
-            $el.parents('.tabBox').find('.tabBackground').animate({ left: index * width });
-          }
-        }
-      },
-      data: function () {
-        return {
-
-          selIndex: 0,
-        }
-      },
-    });
-
-  })(window, jQuery, Vue)
-
-</script>
+<script src="js/component.js"></script>
 <script>
   demo = new Vue({
     el: '#main',
@@ -782,8 +500,5 @@
     },
 
   });
-  //点击页面其他位置 收起左右的下拉框
-  $('body').on('click', function () {
-    $('.selectMain').hide();
-  });
+
 </script>

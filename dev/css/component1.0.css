@@ -1,0 +1,290 @@
+  /* 下拉框 start */
+
+  .selectBox {
+    max-width: 300px;
+    cursor: pointer;
+    font-size: 14px;
+    background: #fff;
+    position: relative;
+}
+
+.selectHd {
+    position: relative;
+    border: 1px solid #ddd;
+    line-height: 32px;
+    padding: 0 0 0 16px;
+}
+
+.selectMain {
+    display: none;
+    white-space: nowrap;
+    font-size: 0px;
+    position: absolute;
+    z-index: 1;
+    background: #fff;
+    width: 100%;
+}
+
+.selectMain ul {
+    border: 1px solid #ddd;
+    max-height: 400px;
+    overflow: hidden;
+    margin-top: -1px;
+    /* min-width: 160px; */
+    font-size: 14px;
+}
+
+.selectMain ul:not(:first-child) {
+    margin-left: -1px;
+}
+
+.selectMain ul li {
+    border-bottom: 1px solid #ddd;
+    line-height: 32px;
+    padding: 0 0 0 16px;
+    position: relative;
+}
+
+.selectMain ul li:last-child {
+    border: none;
+}
+
+.selectMain ul li:not(.active):hover {
+    background: #f8f8f8;
+}
+
+.selectMain ul li:before {
+    background: #ececec;
+    height: 100%;
+    right: 100%;
+    left: 0;
+    content: "";
+    transition: right 400ms ease;
+    position: absolute;
+}
+
+.selectMain ul li:hover:before {
+    right: 0;
+}
+
+.selectMain ul li div {
+    position: relative;
+}
+
+.selectMain ul .active {
+    background: #108EE9;
+    color: #fff;
+}
+
+.selectMain ul .active::before {
+    display: none;
+}
+
+.iconBox {
+    position: absolute;
+    height: 100%;
+    right: 5px;
+    top: 0;
+    text-align: center;
+    color: #666666;
+    transition: all 3s;
+}
+
+.selectBox-small {
+    font-size: 12px;
+}
+
+.selectBox-small .selectMain ul {
+    font-size: 12px;
+}
+/* 下拉框 end */
+/* tab列表 start */
+
+.tabBox {
+    position: relative;
+    text-align: center;
+    display: inline-block;
+}
+
+.tabBox li {
+    float: left;
+    padding: 15px 15px;
+    position: relative;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.tabDefault .active span {
+    background: #42a5f5;
+    color: #fff;
+}
+
+.tabBox li span {
+    padding: 4px 8px;
+}
+
+.tabUnderline li::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    background: #42a5f5;
+    height: 4px;
+    transition: 0.5s all ease;
+}
+
+.tabUnderline li:hover:before {
+    left: 0;
+    right: 0;
+}
+
+.tabUnderline .active::before {
+    left: 0;
+    right: 0;
+}
+
+.tabBorder {
+    border: 1px solid #108ee9;
+    border-radius: 3px;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+}
+
+.tabBorder ul li {
+    width: 100px;
+    padding: 0;
+    font-size: 12px;
+    color: #666;
+    border-right: 1px solid #108ee9;
+    transition: 0.8s background-color ease;
+    line-height: 28px;
+}
+
+.tabBorder ul li:last-child {
+    border: none;
+}
+
+.tabBorder li:hover {
+    background-color: #108ee929;
+}
+
+.tabBorder .active {
+    color: #fff;
+    transition: 0.8s all ease;
+}
+
+.tabBackground {
+    position: absolute;
+    height: 100%;
+    background: #108ee9;
+    top: 0;
+    width: 100px;
+    overflow: hidden;
+}
+
+.tabIcon li::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    background: #e8e8e8;
+    width: 1px;
+    height: 20px;
+    margin: 2px 0 0 0;
+}
+
+.tabIcon li:last-child::after {
+    display: none;
+}
+
+.tabIconBar::before {
+    color: #999;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    content: "\e605";
+}
+
+.tabIcon .active {
+    color: #108ee9;
+}
+
+.tabIcon .active em::before {
+    color: #108ee9;
+}
+
+.tabIcon em {
+    padding: 0 3px 0 0;
+}
+
+.tabIcon em::before {
+    color: #999999;
+}
+
+.tabIcon li span {
+    padding: 0;
+    font-size: 14px;
+}
+
+.tabIcon li {
+    padding: 15px 20px;
+}
+
+.tabIcon li:hover,
+.tabIcon li:hover em::before {
+    /* transition: 0.5s all ease; */
+    color: #108ee9;
+}
+
+.tabVertical {
+    border: 1px solid #dddddd;
+}
+
+.tabVertical ul li {
+    height: 34px;
+    line-height: 34px;
+    padding: 0;
+    border-bottom: 1px solid #dddddd;
+    width: 100%;
+    position: relative;
+    background: #f9f9f9;
+}
+
+.tabVertical ul li:hover {
+    background: #fff;
+    /* transition: 0.5s all ease; */
+}
+
+.tabVertical ul li:last-child {
+    border: none;
+}
+
+.tabVertical .active {
+    background: #fff;
+}
+
+.tabVertical .active::after {
+    display: block;
+    content: '';
+    position: absolute;
+    right: -1px;
+    height: 100%;
+    width: 2px;
+    background: #fff;
+    top: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 5s;
+}
+
+.fade-enter,
+.fade-leave-to
+/* .fade-leave-active in below version 2.1.8 */
+
+{
+    opacity: 0
+}
+/* tab列表 end */
