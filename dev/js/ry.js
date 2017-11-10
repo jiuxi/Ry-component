@@ -236,7 +236,7 @@ var R = {
     },
     /*验证手机号 只支持现有的17个号段*/
     isMobileNumber: function (str) {
-        return (/^1(30|31|32|33|34|35|36|37|38|39|45|47|50|51|52|53|55|56|57|58|59|70|76|77|78|80|81|82|83|84|85|86|87|88|89)\d{8}$/.test(this.trimHeadTail(str)));
+        return (/1[3-8]\d{9}/.test(this.trimHeadTail(str)));
     },
     /*验证电话 区号(3到4位)-电话号码(7到8位)-分机号(3到4位)*/
     isTel: function (str) {
