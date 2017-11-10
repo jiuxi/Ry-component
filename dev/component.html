@@ -293,6 +293,57 @@
     }
 
     /* 弹出层 end */
+
+    /* 按钮 start */
+
+    .r-btn {
+      display: inline-block;
+      line-height: 1;
+      white-space: nowrap;
+      cursor: pointer;
+      background: #fff;
+      border: 1px solid #d8dce5;
+      border-color: #d8dce5;
+      color: #5a5e66;
+      -webkit-appearance: none;
+      text-align: center;
+      box-sizing: border-box;
+      outline: none;
+      margin: 0;
+      transition: .1s;
+      font-weight: 500;
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      padding: 9px 20px;
+      font-size: 14px;
+      border-radius: 4px;
+    }
+
+    .r-btn:hover {
+      background: #fff;
+      border-color: #409eff;
+      color: #409eff;
+    }
+
+    .r-btn-blue {
+      color: #fff;
+      background-color: #409eff;
+      border-color: #409eff;
+    }
+
+    .r-btn-blue:hover {
+      background: #66b1ff;
+      border-color: #66b1ff;
+      color: #fff;
+    }
+
+    .r-btn-small {
+      font-size: 12px;
+      padding: 7px 16px;
+    }
+
+    /* 按钮 end */
   </style>
 </head>
 
@@ -315,7 +366,7 @@
       </div>
       <div class="showBox">
         <p class="title">tab</p>
-        <tab-box :datalist="courseArr" v-on:event='selTab' type="tabIcon"></tab-box>
+        <tab-box :datalist="courseArr" v-on:event='selTab' type="tabIcon" :iconarr="iconarr"></tab-box>
       </div>
 
     </div>
@@ -323,6 +374,11 @@
     <div class="typeBox">
       <p class="title">按钮</p>
       <div class="showBox">
+        <div class="r-btn">默认按钮</div>
+        <div class="r-btn r-btn-blue">主要按钮</div>
+        <div class="r-btn r-btn-small">小按钮</div>
+        <div class="r-btn  r-btn-small  r-btn-blue">小蓝按钮</div>
+        <div class="r-btn">默认按钮</div>
 
       </div>
     </div>
@@ -430,6 +486,7 @@
         { name: '化学', id: 11 },
         { name: '生物', id: 22 },
       ],
+      iconarr: ['icon-shangchuan', 'icon-shangke', 'icon-zuoye', 'icon-xuexi', 'icon-luping', 'icon-dayi'],
       arr1: [
         {
           name: '高一', id: 11, children: [
